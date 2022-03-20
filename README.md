@@ -22,7 +22,7 @@ build --define ipp=on
 
 ### ipp with gnu make
 
-OpenSSL is the default. To build the libraries with ippcp, use the following command line:
+To build the libraries with ipp, use the following command line:
 ```
 make IPP=on
 ```
