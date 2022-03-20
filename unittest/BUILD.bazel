@@ -1,0 +1,18 @@
+cc_test(
+	name = "importzlibunit",
+	size = "small",
+	srcs = [
+		"zlib.cc",
+	],
+	data = [
+		"pg1524.txt",
+		"pg1524.txt.gz",
+		"pg1524.txt.zlib",
+	],
+	copts = ["-std=c++17"],
+	deps = [
+		"@com_google_googletest//:gtest_main",
+		"@com_stablecc_scclib_zlib//:importzlib",
+		"@com_stablecc_scclib//util:sccutillib",
+	],
+)

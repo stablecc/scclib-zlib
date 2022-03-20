@@ -1,0 +1,37 @@
+config_setting(
+	name = "ippcp",
+	define_values = {
+		"ipp": "on",
+	},
+)
+
+cc_library(
+	name = "importzlib",
+	srcs = glob([
+		"zlib-1.2.11-ipp/*.c",
+	]),
+	hdrs = glob([
+		"zlib-1.2.11-ipp/*.h",
+	]),
+	includes = [
+		"include",
+	],
+	copts = select ({
+		":ippcp": [
+			"-DWITH_IPP",
+		],
+		"//conditions:default": [
+		],
+	}) + [
+		"-D_LARGEFILE64_SOURCE=1",
+		"-DHAVE_HIDDEN",
+	],
+	deps = select({
+		":ippcp": [
+			"@com_stablecc_scclib_ipp//:importipplib",
+		],
+		"//conditions:default": [
+		],
+	}),
+	visibility = ["//visibility:public"],
+)
