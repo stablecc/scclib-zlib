@@ -15,7 +15,7 @@ This library can be built with or without ipp support.
 
 ### ipp with bazel
 
-To use ippcp, use the following command line:
+To enable ipp, add the following to the command line:
 ```
 $ bazel build :importzlib --define ipp=on
 ```
