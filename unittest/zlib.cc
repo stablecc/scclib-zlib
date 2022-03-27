@@ -71,23 +71,36 @@ cout << "current dir: " << curdir << endl;
 
 	void load_file(const string& fn, vector<char>& v)
 	{
-		stringstream cur;
-		cur << curdir << "/" << fn;
+		cout << "loading file " << fn << " from current dir " << curdir << endl;
 
-		std::ifstream f(cur.str());
-		
+		/*
+			The way bazel deals with data files is a bit strange, but it probably makes sense:
+			
+			* If the test was run directly (i.e. using make), the files will be the local directory.
+			* If run from source (in the workspace), will be in unittest/
+			* If run from remote, will be in external/com_stablecc_scclib_zlib/unittest/
+		*/
+
+		vector<string> locs = {".", "unittest", "external/com_stablecc_scclib_zlib/unittest"};
+
+		ifstream f;
+
+		for (auto& l : locs)
+		{
+			stringstream tryd;
+			tryd << l << "/" << fn;
+	
+			f.open(tryd.str());
+
+			if (f.is_open())
+			{
+				break;
+			}
+		}
+
 		if (!f.is_open())
 		{
-			stringstream rel;
-			rel << curdir << "/unittest/" << fn;
-
-			// if this was run via bazel run or test, the files will be relative to the root directory
-			f.open(rel.str());
-	
-			if (!f.is_open())
-			{
-				throw system_error(errno, std::system_category(), fn);
-			}
+			throw system_error(errno, std::system_category(), fn);
 		}
 
 		f.seekg(0, ios_base::end);
