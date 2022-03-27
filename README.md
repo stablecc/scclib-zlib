@@ -33,9 +33,9 @@ make IPP=on
 
 ## licensing
 
-Source:
+Original source:
 * [BSD 3-Clause License](LICENSE)
-* [zlib 1.2.11](zlib.txt)
 
-Redistribution:
-* [Intel Simplified Software License](intel.txt)
+External and redistributable:
+* [zlib](lic/zlib.txt)
+* [ipp](lic/intel.txt)
