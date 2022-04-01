@@ -12,7 +12,10 @@ cc_library(
 	]),
 	hdrs = glob([
 		"zlib-1.2.11-ipp/*.h",
-	]),
+	]) + [
+		"include/zconf.h",
+		"include/zlib.h",
+	],
 	includes = [
 		"include",
 	],
