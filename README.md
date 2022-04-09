@@ -40,3 +40,4 @@ External and redistributable:
 * [zlib](lic/zlib.txt)
 * [ipp](lic/intel.txt)
 * [googletest](lic/google.txt)
+* [bazel (google)](lic/bazel.txt)
