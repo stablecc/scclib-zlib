@@ -26,14 +26,14 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-BASE = ../../..
+BASE = ../..
 
 NAME = zlib_unit
 
 SRCS = main.cc zlib.cc
 
-include $(BASE)/import/googletest/googletest/make.mk
-include $(BASE)/import/zlib/make.mk
-include $(BASE)/util/make.mk
+include $(BASE)/googletest/googletest/make.mk
+include $(BASE)/scclib-zlib/make.mk
+include $(BASE)/scclib/util/make.mk
 
-include $(BASE)/make/app.mk
+include $(BASE)/scclib/make/app.mk

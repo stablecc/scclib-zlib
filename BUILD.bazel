@@ -27,7 +27,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 config_setting(
-	name = "ippcp",
+	name = "ipplib",
 	define_values = {
 		"ipp": "on",
 	},
@@ -48,7 +48,7 @@ cc_library(
 		"include",
 	],
 	copts = select ({
-		":ippcp": [
+		":ipplib": [
 			"-DWITH_IPP",
 		],
 		"//conditions:default": [
@@ -58,7 +58,7 @@ cc_library(
 		"-DHAVE_HIDDEN",
 	],
 	deps = select({
-		":ippcp": [
+		":ipplib": [
 			"@com_stablecc_scclib_ipp//:importipplib",
 		],
 		"//conditions:default": [

@@ -26,7 +26,7 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-BASE = ../..
+BASE = ..
 
 CPPFLAGS += -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -I zlib-1.2.11-ipp
 ifeq ($(IPP),on)
@@ -43,6 +43,6 @@ OBJG = zlib-1.2.11-ipp/compress.c zlib-1.2.11-ipp/uncompr.c zlib-1.2.11-ipp/gzcl
 SRCS = $(OBJZ) $(OBJG)
 
 ifeq ($(IPP),on)
-include $(BASE)/import/ipp/make.mk
+include $(BASE)/scclib-ipp/make.mk
 endif
-include $(BASE)/make/sl.mk
+include $(BASE)/scclib/make/sl.mk

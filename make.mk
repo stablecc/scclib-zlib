@@ -29,12 +29,12 @@
 ifndef IMPORT_ZLIB
 IMPORT_ZLIB := 1
 
-BLDLIBS += $(BASE)/import/zlib
+BLDLIBS += $(BASE)/scclib-zlib
 
-CPPFLAGS += -I $(BASE)/import/zlib/include
+CPPFLAGS += -I $(BASE)/scclib-zlib/include
 
 ifeq ($(IPP),on)
-include $(BASE)/import/ipp/make.mk
+include $(BASE)/scclib-ipp/make.mk
 endif
 
 ifeq ($(BLDTYPE),debug)
