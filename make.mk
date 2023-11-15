@@ -31,7 +31,7 @@ IMPORT_ZLIB := 1
 
 BLDLIBS += $(BASE)/scclib-zlib
 
-CPPFLAGS += -I $(BASE)/scclib-zlib/include
+CPPFLAGS += -isystem $(BASE)/scclib-zlib/include
 
 ifeq ($(IPP),on)
 include $(BASE)/scclib-ipp/make.mk
