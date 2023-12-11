@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sstream>
 #include <zlib.h>
 #include <util/fs.h>
+#include <cstdlib>
 
 using std::cout;
 using std::endl;
@@ -71,33 +72,24 @@ cout << "current dir: " << curdir << endl;
 
 	void load_file(const string& fn, vector<char>& v)
 	{
-		cout << "loading file " << fn << " from current dir " << curdir << endl;
+		// detect the bazel workspace environment, and create a relative path to the data files
+		auto sd = getenv("TEST_SRCDIR");
+		auto wd = getenv("TEST_WORKSPACE");
 
-		/*
-			The way bazel deals with data files is a bit strange, but it probably makes sense:
-			
-			* If the test was run directly (i.e. using make), the files will be the local directory.
-			* If run from source (in the workspace), will be in unittest/
-			* If run from remote, will be in external/com_stablecc_scclib_zlib/unittest/
-		*/
+		stringstream fname;
 
-		vector<string> locs = {".", "unittest", "external/com_stablecc_scclib_zlib/unittest"};
-
-		ifstream f;
-
-		for (auto& l : locs)
+		if (sd && wd)
 		{
-			stringstream tryd;
-			tryd << l << "/" << fn;
-	
-			f.open(tryd.str());
-
-			if (f.is_open())
-			{
-				break;
-			}
+			fname << sd << "/" << wd << "/unittest/" << fn;
+		}
+		else
+		{
+			fname << fn;
 		}
 
+		cout << "loading file " << fname.str() << endl;
+
+		ifstream f(fname.str());
 		if (!f.is_open())
 		{
 			throw system_error(errno, std::system_category(), fn);
