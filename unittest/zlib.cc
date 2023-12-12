@@ -74,7 +74,15 @@ cout << "current dir: " << curdir << endl;
 	{
 		// detect the bazel workspace environment, and create a relative path to the data files
 		auto sd = getenv("TEST_SRCDIR");
+		if (sd)
+		{
+			cout << "TEST_SRCDIR=" << sd << endl;
+		}
 		auto wd = getenv("TEST_WORKSPACE");
+		if (wd)
+		{
+			cout << "TEST_WORKSPACE=" << wd << endl;
+		}
 
 		stringstream fname;
 
