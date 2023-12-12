@@ -49,6 +49,8 @@ using std::system_error;
 using std::stringstream;
 using fs = scc::util::Filesystem;
 
+#include <cstdlib>
+
 class ZlibTest : public testing::Test
 {
 	string curdir;
@@ -72,23 +74,22 @@ cout << "current dir: " << curdir << endl;
 
 	void load_file(const string& fn, vector<char>& v)
 	{
-		// detect the bazel workspace environment, and create a relative path to the data files
+		// ensure the system detects bazel and finds files in the correct location
+		// see https://bazel.build/reference/test-encyclopedia for a description of bazel environment
 		auto sd = getenv("TEST_SRCDIR");
 		if (sd)
 		{
 			cout << "TEST_SRCDIR=" << sd << endl;
-		}
-		auto wd = getenv("TEST_WORKSPACE");
-		if (wd)
-		{
-			cout << "TEST_WORKSPACE=" << wd << endl;
+			std::stringstream s;
+			s << "ls -l -R " << sd;
+			system(s.str().c_str());
 		}
 
 		stringstream fname;
 
-		if (sd && wd)
+		if (sd)
 		{
-			fname << sd << "/" << wd << "/unittest/" << fn;
+			fname << sd << "/com_stablecc_scclib_zlib/unittest/" << fn;
 		}
 		else
 		{
