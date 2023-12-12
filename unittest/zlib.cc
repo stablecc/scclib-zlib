@@ -49,8 +49,6 @@ using std::system_error;
 using std::stringstream;
 using fs = scc::util::Filesystem;
 
-#include <cstdlib>
-
 class ZlibTest : public testing::Test
 {
 	string curdir;
@@ -80,9 +78,6 @@ cout << "current dir: " << curdir << endl;
 		if (sd)
 		{
 			cout << "TEST_SRCDIR=" << sd << endl;
-			std::stringstream s;
-			s << "ls -l -R " << sd;
-			system(s.str().c_str());
 		}
 
 		stringstream fname;
